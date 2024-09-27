@@ -1,0 +1,20 @@
+server:
+  servlet:
+    context-path: /api/v1
+  port: 8084
+
+spring:
+  ## application name
+  application:
+    name: customer-service
+  ## database config H2
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://customer-db:5400/customer_db?currentSchema=public
+    username: admin
+    password: admin
+
+  ## jpa structure config
+  jpa:
+    show-sql: true
+    format_sql: true
