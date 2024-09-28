@@ -43,7 +43,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.postgresql:postgresql:42.6.0'
+	implementation 'org.hibernate.orm:hibernate-core:6.2.0.Final'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -59,7 +60,7 @@ dependencies {
 
 tasks.register('buildSpringServer', org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
 	generatorName = "spring"
-	inputSpec = "src/main/resources/openapi.yaml".toString()
+	inputSpec = "$rootDir/src/main/resources/openapi.yaml".toString()
 	outputDir = "$buildDir/generated".toString()
 	apiPackage = "com.ms.customer.service.server"
 	modelPackage = "com.ms.customer.service.server.models"
@@ -79,7 +80,3 @@ tasks.register('buildSpringServer', org.openapitools.generator.gradle.plugin.tas
 compileJava.dependsOn buildSpringServer
 
 sourceSets.main.java.srcDirs = ["$buildDir/generated/src/main/java", "src/main/java"]
-
-tasks.named('test') {
-	useJUnitPlatform()
-}

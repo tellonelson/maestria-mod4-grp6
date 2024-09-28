@@ -10,11 +10,17 @@ spring:
   ## database config H2
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://customer-db:5400/customer_db?currentSchema=public
+    url: jdbc:postgresql://customer-db:5432/customer_db?currentSchema=public
     username: admin
     password: admin
 
   ## jpa structure config
   jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     format_sql: true
+    hibernate:
+      ddl-auto: update
+
