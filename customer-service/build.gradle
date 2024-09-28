@@ -38,6 +38,10 @@ repositories {
 	mavenCentral()
 }
 
+ext{
+	set('springCloudVersion', "2023.0.3")
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -56,6 +60,15 @@ dependencies {
 
 	//openapi dependencies
 	implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
+
+	//eureka client
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.register('buildSpringServer', org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {

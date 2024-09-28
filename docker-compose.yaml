@@ -1,5 +1,21 @@
 services:
   
+  service-registry:
+    image: service-registry:latest
+    build:
+      dockerfile: ./service-registry/Dockerfile
+    container_name: service-registry
+    restart: always
+    ports:
+      - "8056:8056"
+    depends_on:
+      customer-db:
+        condition: service_healthy      
+    working_dir: /app
+    command: [ "java", "-jar", "service-registry.jar" ]
+    networks:
+      - ups-grp6
+
   customer-service:
     image: customer-service:latest
     build:
