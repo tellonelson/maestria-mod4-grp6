@@ -1,5 +1,5 @@
 server:
-  port: 8056
+  port: 8761
 
 spring:
   application:
@@ -11,3 +11,9 @@ eureka:
     fetch-registry: false
   datacenter: 'UPS - GRUPO 6'
   environment: 'Development'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
