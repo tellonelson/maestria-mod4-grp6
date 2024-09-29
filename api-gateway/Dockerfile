@@ -5,7 +5,7 @@ FROM gradle:jdk17 AS builder
 WORKDIR /app
 
 # Copiar los archivos de Gradle y el código fuente
-COPY ./service-registry .
+COPY ./api-gateway .
 
 # Construir el proyecto
 RUN gradle build --no-daemon
@@ -20,7 +20,7 @@ WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Exponer el puerto que usa la aplicación
-EXPOSE 8056
+EXPOSE 8080
 
 # Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
